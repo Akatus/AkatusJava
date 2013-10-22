@@ -6,6 +6,7 @@ Wrapper para integração com a API da Akatus
 Exemplo de uso
 --------------
 
+```java
     //Cria uma instância do carrinho para integrar com a operação carrinho da
     //Akatus.
     final CartOperation cart = new Akatus(Akatus.Environment.DEVELOPMENT,
@@ -75,3 +76,4 @@ Exemplo de uso
     
     //Obtém a URL de retorno, caso o pagamento seja via boleto.
     //cartResponse.getReturnURL();
+```
