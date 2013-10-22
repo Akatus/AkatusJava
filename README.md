@@ -43,6 +43,8 @@ Exemplo de uso
     cart.addProduct("UFC1403", "Luva de box com ferradura dentro", 148.99,
         8.5, 1, 16.45, 10.00);
      
+    Transaction transaction = cart.getTransaction();
+
     //Configurações da transação
     transaction.setReference("sample123");
     transaction.setPaymentMethod(Transaction.PaymentMethod.CARTAO_AMEX);
@@ -57,7 +59,7 @@ Exemplo de uso
     //Configurações do portador do cartão de crédito.
     final Holder holder = transaction.holder();
     
-    holder.setDocument("99999999999");
+    holder.setDocument("05142177312");
     holder.setPhone("9999999999");
     holder.setName("Fulano de Tal");
 
