@@ -1,5 +1,6 @@
 package com.akatus.connect.api.v1.cart;
 
+import java.text.DecimalFormat;
 import java.util.Iterator;
 
 import org.w3c.dom.Element;
@@ -14,6 +15,9 @@ import com.akatus.connect.api.v1.entity.Product;
 import com.akatus.connect.api.v1.entity.Transaction;
 
 class CartXMLRequestBuilder extends AkatusXMLRequestBuilder {
+
+	private DecimalFormat decimalFormatter = new DecimalFormat("#.00");
+	
 	public String build(AkatusOperation operation) {
 		createDocument();
 		createCarrinho((CartOperation) operation);
@@ -129,13 +133,13 @@ class CartXMLRequestBuilder extends AkatusXMLRequestBuilder {
 		productElement.appendChild(createElementWithTextContent("quantidade",
 				product.getQuantity().toString()));
 		productElement.appendChild(createElementWithTextContent("preco",
-				product.getPrice().toString()));
-		productElement.appendChild(createElementWithTextContent("peso", product
-				.getWeight().toString()));
+				decimalFormatter.format(product.getPrice())));
+		productElement.appendChild(createElementWithTextContent("peso", 
+				decimalFormatter.format(product.getWeight())));
 		productElement.appendChild(createElementWithTextContent("frete",
-				product.getShipping().toString()));
+				decimalFormatter.format(product.getShipping())));
 		productElement.appendChild(createElementWithTextContent("desconto",
-				product.getDiscount().toString()));
+				decimalFormatter.format(product.getDiscount())));
 
 		return productElement;
 	}
@@ -145,13 +149,13 @@ class CartXMLRequestBuilder extends AkatusXMLRequestBuilder {
 		final Transaction transaction = operation.getTransaction();
 		final Transaction.PaymentMethod paymentMethod = transaction
 				.getPaymentMethod();
-
+		
 		transactionElement.appendChild(createElementWithTextContent(
-				"desconto", transaction.getDiscountAmount().toString()));
+				"desconto", decimalFormatter.format(transaction.getDiscountAmount())));
 		transactionElement.appendChild(createElementWithTextContent(
-				"peso", transaction.getWeight().toString()));
+				"peso", decimalFormatter.format(transaction.getWeight())));
 		transactionElement.appendChild(createElementWithTextContent(
-				"frete", transaction.getShippingAmount().toString()));
+				"frete", decimalFormatter.format(transaction.getShippingAmount())));
 		transactionElement.appendChild(createElementWithTextContent("moeda",
 				transaction.getCurrency().toString()));
 		transactionElement.appendChild(createElementWithTextContent(
